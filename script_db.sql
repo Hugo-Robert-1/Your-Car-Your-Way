@@ -119,7 +119,7 @@ CREATE TABLE `messages` (
    status ENUM('sent','delivered','read') DEFAULT 'sent',
    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
    id_user INT NOT NULL,
-   id_conversation INT NOT NULL,
+   id_conversation INT,
    FOREIGN KEY(id_user) REFERENCES users(id),
    FOREIGN KEY(id_conversation) REFERENCES conversations(id)
 );
