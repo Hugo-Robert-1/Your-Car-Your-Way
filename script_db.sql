@@ -1,5 +1,5 @@
 -- Adresse
-CREATE TABLE `address` (
+CREATE TABLE `addresses` (
    id INT PRIMARY KEY AUTO_INCREMENT,
    country VARCHAR(255) NOT NULL,
    city VARCHAR(255) NOT NULL,
@@ -14,7 +14,7 @@ CREATE TABLE `offices` (
    name VARCHAR(250) ,
    phone_number VARCHAR(50) ,
    id_address INT NOT NULL,
-   FOREIGN KEY(id_address) REFERENCES address(id)
+   FOREIGN KEY(id_address) REFERENCES addresses(id)
 );
 
 -- Utilisateurs
@@ -27,9 +27,9 @@ CREATE TABLE `users` (
    password VARCHAR(250)  NOT NULL,
    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-   id_address INT NOT NULL,
+   id_address INT,
    UNIQUE(email),
-   FOREIGN KEY(id_address) REFERENCES address(id)
+   FOREIGN KEY(id_address) REFERENCES addresses(id)
 );
 
 -- Voitures
@@ -58,7 +58,7 @@ CREATE TABLE `rentals` (
    id_arrival INT NOT NULL,
    id_departure INT NOT NULL,
    id_car INT NOT NULL,
-   id_user INT,
+   id_user INT NOT NULL,
    FOREIGN KEY(id_arrival) REFERENCES offices(id),
    FOREIGN KEY(id_departure) REFERENCES offices(id),
    FOREIGN KEY(id_car) REFERENCES cars(id),
@@ -73,6 +73,8 @@ CREATE TABLE `documents` (
    url VARCHAR(255) ,
    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
    id_user INT,
+   id_rental INT,
+   FOREIGN KEY(id_rental) REFERENCES Rentals(id),
    FOREIGN KEY(id_user) REFERENCES users(id)
 );
 
